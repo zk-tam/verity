@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-loos-extended-bold {
+    font-family: var(--font-loos-extended-bold);
+  }
+}
+
+@layer base {
+  :root {
+    --background-gradient-start: 265 100% 97%;
+    --background-gradient-end: 25 100% 94%;
+
+    --glass-gradient-start: 201 100% 50%;
+    --glass-gradient-end: 98 100% 76%;
+
+    --title: 0 0% 100%;
+    --subtitle: 52 100% 86%;
+
+    --contrast: 0 0% 20%;
+
+    --background: 0 0% 100%;
+    --foreground: 210 25% 31%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 25% 31%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 25% 31%;
+    --primary: 190 45% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 48 52% 82%;
+    --secondary-foreground: 210 25% 31%;
+    --muted: 48 52% 82%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 81 58% 48%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 48 52% 88%;
+    --input: 48 52% 95%;
+    --ring: 190 45% 55%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+body {
+  background-color: hsl(var(--background-gradient-start));
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  right: -100px;
+  bottom: -100px;
+  background:
+    radial-gradient(circle at 20% 20%, hsl(var(--glass-gradient-start) / 0.35), transparent 34%),
+    radial-gradient(circle at 80% 10%, hsl(var(--glass-gradient-end) / 0.35), transparent 32%),
+    linear-gradient(135deg, hsl(var(--background-gradient-start)), hsl(var(--background-gradient-end)));
+  filter: blur(50px);
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(5px);
+  z-index: -1;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+/* Custom text-shadow utilities */
+.text-shadow-glow {
+  text-shadow: 0 0 10px #fff;
+}
+
+.hover\:text-shadow-glow:hover {
+  text-shadow: 0 0 10px #ffffff81;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 32px;
+  width: 32px;
+  border-radius: 9999px;
+  background: #e1ae2c;
+  border: 3px solid #e1ae2c;
+  box-shadow: inset 0 0 5px 3px rgba(255, 255, 255, 0.5), 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+}
+
+.slider::-moz-range-thumb {
+  height: 32px;
+  width: 32px;
+  border-radius: 9999px;
+  background: #e1ae2c;
+  border: 3px solid #e1ae2c;
+  box-shadow: inset 0 0 5px 3px rgba(255, 255, 255, 0.5), 0 4px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+.slider::-moz-range-thumb:active {
+  transform: scale(0.95);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Carousel holographic card overrides */
+.carousel-holo-card {
+  /* Override the original card dimensions */
+  width: 256px !important;
+  height: 360px !important;
+  margin: 0 !important;
+
+  /* Ensure the card fits well in carousel context */
+  box-shadow:
+    -5px -5px 5px -5px var(--color1),
+    5px 5px 5px -5px var(--color2),
+    -7px -7px 10px -5px transparent,
+    7px 7px 10px -5px transparent,
+    0 0 5px 0px rgba(255,255,255,0),
+    0 25px 25px -10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.carousel-holo-card:hover {
+  box-shadow:
+    -15px -15px 20px -20px var(--color1),
+    15px 15px 20px -20px var(--color2),
+    -7px -7px 10px -5px var(--color1),
+    7px 7px 10px -5px var(--color2),
+    0 0 13px 4px rgba(255,255,255,0.3),
+    0 25px 25px -10px rgba(0, 0, 0, 0.4) !important;
+}
+
+.explore-banner-ribbon {
+  position: relative;
+}
+
+.explore-banner-ribbon:after {
+  @apply right-[-20px] w-[20px] border-[16px] md:right-[-30px] md:w-[30px] md:border-[20px] border-subtitle overflow-auto;
+  content: "";
+  position: absolute;
+  border-right-color: transparent;
+}
+
+.badge {
+  @apply !rounded-full bg-white/95 backdrop-blur-sm text-contrast shadow-md px-3 py-1 text-xs font-bold uppercase !block;
+  aspect-ratio: unset !important;
+  border: 1px solid #000;
+}

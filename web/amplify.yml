@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - env | grep -E '^(BACKEND_URL|NEXT_PUBLIC_)=' >> .env.production
+        - echo "Next.js env keys written to .env.production:" && cut -d= -f1 .env.production | sort
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
